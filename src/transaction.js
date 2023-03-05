@@ -72,10 +72,17 @@ class Transaction {
     }
     const voutLen = bufferReader.readVarInt();
     for (let i = 0; i < voutLen; ++i) {
-      tx.outs.push({
-        value: bufferReader.readUInt64(),
-        script: bufferReader.readVarSlice(),
-      });
+      try {
+        tx.outs.push({
+            value: bufferReader.readUInt64(),
+            script: bufferReader.readVarSlice(),
+        });
+      } catch(e) {
+
+          console.log('Invalid TX output', tx);
+          return tx;
+          
+      }
     }
     if (hasWitnesses) {
       for (let i = 0; i < vinLen; ++i) {
