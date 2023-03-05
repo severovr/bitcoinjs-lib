@@ -79,7 +79,7 @@ class Transaction {
         });
       } catch(e) {
 
-          console.log('Invalid TX output', tx);
+          // console.log('Invalid TX output', tx);
           return tx;
           
       }
